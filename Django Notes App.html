@@ -1,0 +1,1022 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta charset=utf8>
+    <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <style>
+      :root {
+        color-scheme: light;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px)
+      }
+
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px)
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font: 14px -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #fff;
+        color: #000
+      }
+
+      img {
+        max-width: 100%
+      }
+
+      [hidden]:not([hidden=until-found i]) {
+        display: none !important
+      }
+    </style>
+  </head>
+
+  <body>
+    <title>Django Notes App</title>
+    <meta name="claude:viewport-fit-sides" content="cover">
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <style>
+      /* Layout: single reading column with a sticky section index; stack tiles, then sections of prose, code and tables. */
+      :root {
+        --bg: #f4f7f4;
+        --surface: #ffffff;
+        --fg: #14201a;
+        --muted: #556459;
+        --line: #d5ddd7;
+        --accent: #0b6a49;
+        --accent-soft: #dcefe5;
+        --code-bg: #101c16;
+        --code-fg: #dbe8df;
+        --warn: #9a5b00;
+        --warn-soft: #fbefd6;
+        --bad: #a33a2b;
+        --bad-soft: #f8e1dc;
+        --ok: #1d7a46;
+        --ok-soft: #dcf0e2;
+        --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+        --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+        --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0d1511;
+          --surface: #141f19;
+          --fg: #e2ebe5;
+          --muted: #98aa9f;
+          --line: #26352c;
+          --accent: #4cc38a;
+          --accent-soft: #163326;
+          --code-bg: #08100c;
+          --code-fg: #d4e3d9;
+          --warn: #e8b35a;
+          --warn-soft: #33270f;
+          --bad: #ee8b7a;
+          --bad-soft: #3a1b16;
+          --ok: #6fd69a;
+          --ok-soft: #14301f;
+          color-scheme: dark;
+        }
+      }
+
+      :root[data-theme="dark"] {
+        --bg: #0d1511;
+        --surface: #141f19;
+        --fg: #e2ebe5;
+        --muted: #98aa9f;
+        --line: #26352c;
+        --accent: #4cc38a;
+        --accent-soft: #163326;
+        --code-bg: #08100c;
+        --code-fg: #d4e3d9;
+        --warn: #e8b35a;
+        --warn-soft: #33270f;
+        --bad: #ee8b7a;
+        --bad-soft: #3a1b16;
+        --ok: #6fd69a;
+        --ok-soft: #14301f;
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font: 400 16px/1.6 var(--font-body);
+        padding-block: 0 64px;
+        padding-left: max(16px, env(safe-area-inset-left, 0px));
+        padding-right: max(16px, env(safe-area-inset-right, 0px));
+      }
+
+      .wrap {
+        max-width: 880px;
+        margin: 0 auto;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      header.top {
+        padding-block: 40px 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .eyebrow {
+        font: 500 12px/1 var(--font-mono);
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      h1 {
+        font: 700 clamp(2.2rem, 6vw, 3.4rem)/1.05 var(--font-display);
+        letter-spacing: -.02em;
+        margin: 14px 0 12px;
+        text-wrap: balance;
+      }
+
+      .lede {
+        font-size: 1.1rem;
+        color: var(--muted);
+        max-width: 62ch;
+        margin: 0;
+      }
+
+      nav.index {
+        position: sticky;
+        top: env(safe-area-inset-top, 0px);
+        z-index: 5;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        padding-block: 10px;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0 0 auto;
+        height: env(safe-area-inset-top, 0px);
+        z-index: 10;
+        background: var(--bg);
+      }
+
+      nav.index a {
+        white-space: nowrap;
+        text-decoration: none;
+        color: var(--muted);
+        font: 500 13px/1 var(--font-body);
+        padding: 8px 12px;
+        border-radius: 6px;
+      }
+
+      nav.index a:hover {
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+
+      section {
+        padding-block: 44px 8px;
+        scroll-margin-top: 56px;
+      }
+
+      h2 {
+        font: 700 1.7rem/1.15 var(--font-display);
+        letter-spacing: -.01em;
+        margin: 0 0 14px;
+        text-wrap: balance;
+      }
+
+      h3 {
+        font: 600 1.05rem/1.3 var(--font-body);
+        margin: 28px 0 8px;
+      }
+
+      p {
+        margin: 0 0 14px;
+        max-width: 70ch;
+      }
+
+      ul {
+        padding-left: 1.2em;
+        margin: 0 0 14px;
+        max-width: 70ch;
+      }
+
+      li {
+        margin-bottom: 4px;
+      }
+
+      code {
+        font: 400 .88em var(--font-mono);
+        background: var(--accent-soft);
+        color: var(--fg);
+        padding: .12em .4em;
+        border-radius: 4px;
+        overflow-wrap: anywhere;
+      }
+
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .fact {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px 16px;
+        min-width: 0;
+      }
+
+      .fact dt {
+        font: 500 11px/1 var(--font-mono);
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      .fact dd {
+        margin: 0;
+        font-weight: 500;
+        overflow-wrap: anywhere;
+      }
+
+      dl {
+        margin: 0;
+      }
+
+      .tablewrap {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        margin: 8px 0 18px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 560px;
+        font-size: .94rem;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      th {
+        font: 500 11px/1.2 var(--font-mono);
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: var(--bg);
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      td.mono,
+      .mono {
+        font-family: var(--font-mono);
+        font-size: .86rem;
+      }
+
+      .codeblock {
+        position: relative;
+        margin: 8px 0 18px;
+      }
+
+      .codeblock .cap {
+        font: 500 12px/1 var(--font-mono);
+        color: var(--muted);
+        margin-bottom: 8px;
+        display: block;
+        overflow-wrap: anywhere;
+      }
+
+      pre.code {
+        margin: 0;
+        background: var(--code-bg);
+        color: var(--code-fg);
+        border-radius: 8px;
+        padding: 16px 16px;
+        overflow-x: auto;
+        font: 400 13.5px/1.6 var(--font-mono);
+        tab-size: 2;
+      }
+
+      .copy {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        font: 500 12px/1 var(--font-mono);
+        background: rgba(255, 255, 255, .1);
+        color: var(--code-fg);
+        border: 1px solid rgba(255, 255, 255, .22);
+        border-radius: 6px;
+        padding: 7px 10px;
+        cursor: pointer;
+      }
+
+      .copy:hover {
+        background: rgba(255, 255, 255, .2);
+      }
+
+      .diagram {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+        margin: 8px 0 18px;
+        overflow-x: auto;
+      }
+
+      .diagram pre.mermaid {
+        margin: 0;
+        background: transparent;
+      }
+
+      .issue {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        margin: 0 0 14px;
+        overflow: hidden;
+      }
+
+      .issue header {
+        padding: 12px 16px;
+        display: flex;
+        gap: 10px;
+        align-items: baseline;
+        flex-wrap: wrap;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .issue header h3 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .pill {
+        font: 500 11px/1 var(--font-mono);
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        padding: 5px 8px;
+        border-radius: 999px;
+      }
+
+      .pill.bad {
+        background: var(--bad-soft);
+        color: var(--bad);
+      }
+
+      .pill.warn {
+        background: var(--warn-soft);
+        color: var(--warn);
+      }
+
+      .pill.ok {
+        background: var(--ok-soft);
+        color: var(--ok);
+      }
+
+      .issue .body {
+        padding: 14px 16px 4px;
+      }
+
+      .issue .body p {
+        margin-bottom: 10px;
+      }
+
+      .err {
+        font: 400 .82rem/1.5 var(--font-mono);
+        background: var(--bad-soft);
+        color: var(--bad);
+        padding: 8px 10px;
+        border-radius: 6px;
+        overflow-wrap: anywhere;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .note {
+        background: var(--warn-soft);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 8px 0 18px;
+        max-width: 70ch;
+      }
+
+      .note strong {
+        color: var(--warn);
+      }
+
+      footer {
+        margin-top: 56px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: .9rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+
+    <div class="wrap">
+      <header class="top">
+        <span class="eyebrow">Project reference</span>
+        <h1>Django Notes App</h1>
+        <p class="lede">A Django and MySQL notes application served by Nginx and containerized with Docker Compose.
+          Deployed on an AWS EC2
+          server, the whole stack builds and starts with a single Docker command.</p>
+      </header>
+
+      <nav class="index" aria-label="Sections">
+        <a href="#overview">Overview</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#docker">Docker files</a>
+        <a href="#deploy">Run on EC2</a>
+        <a href="#issues">Problems and fixes</a>
+        <a href="#commands">Commands</a>
+      </nav>
+
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>The app is a notes website written in Django. Notes are stored in MySQL. Nginx sits in front and forwards web
+          traffic to Django. Everything runs as three Docker containers started by one command.</p>
+        <dl class="facts">
+          <div class="fact">
+            <dt>Repository</dt>
+            <dd><a href="https://github.com/itsmedaksh3048-blip/Django-Notes-App.git" target="_blank"
+                rel="noopener">itsmedaksh3048-blip / Django_Notes_App</a></dd>
+          </div>
+          <div class="fact">
+            <dt>Branch</dt>
+            <dd>main</dd>
+          </div>
+          <div class="fact">
+            <dt>Backend</dt>
+            <dd>Django on Python 3.9</dd>
+          </div>
+          <div class="fact">
+            <dt>Database</dt>
+            <dd>MySQL (official image)</dd>
+          </div>
+          <div class="fact">
+            <dt>Web server</dt>
+            <dd>Nginx 1.23.3 (alpine)</dd>
+          </div>
+          <div class="fact">
+            <dt>Containers</dt>
+            <dd class="mono">django_cont, db_cont, nginx_cont</dd>
+          </div>
+          <div class="fact">
+            <dt>Runtime</dt>
+            <dd>Docker and Docker Compose</dd>
+          </div>
+          <div class="fact">
+            <dt>Server</dt>
+            <dd>AWS EC2, Amazon Linux</dd>
+          </div>
+        </dl>
+
+        <h3>Ports</h3>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Port</th>
+                <th>Used for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Nginx</td>
+                <td class="mono">80</td>
+                <td>Public entry to the notes app</td>
+              </tr>
+              <tr>
+                <td>Django</td>
+                <td class="mono">8000</td>
+                <td>Application server inside the stack</td>
+              </tr>
+              <tr>
+                <td>MySQL</td>
+                <td class="mono">3306</td>
+                <td>Database, reachable only from other containers</td>
+              </tr>
+              <tr>
+                <td>SSH</td>
+                <td class="mono">22</td>
+                <td>Your own login to the server</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Open ports 80 and 8000 in the EC2 security group to reach the app, and limit port 22 to your own IP.</p>
+      </section>
+
+      <section id="architecture">
+        <h2>Architecture</h2>
+        <h3>How a request reaches a note</h3>
+        <div class="diagram">
+          <pre class="mermaid">
+            flowchart LR
+            B[Browser] -->|port 80| N[nginx_cont]
+            N -->|port 8000| D[django_cont]
+            D -->|port 3306| M[(db_cont MySQL)]
+          </pre>
+        </div>
+        <h3>How code reaches the server</h3>
+        <div class="diagram">
+          <pre class="mermaid">
+            flowchart LR
+            G[GitHub main] -->|git clone or git pull| E[EC2 server]
+            E -->|docker compose up --build -d| C[3 containers]
+          </pre>
+        </div>
+        <p>You update the app by pulling the latest code on the server and rebuilding the containers.</p>
+      </section>
+
+      <section id="docker">
+        <h2>Docker files</h2>
+        <h3>Dockerfile for the Django container</h3>
+        <p>The original file had no start command, so a container started from it ran plain <code>python3</code> and
+          exited with code 0. The last line below fixes that. Migrations run when the container starts, because MySQL is
+          not available while the image is being built.</p>
+        <div class="codeblock"><span class="cap">Dockerfile</span>
+          <pre class="code">FROM python:3.9
+
+            WORKDIR /app/backend
+
+            COPY requirements.txt /app/backend
+            RUN apt-get update \
+            &amp;&amp; apt-get upgrade -y \
+            &amp;&amp; apt-get install -y gcc default-libmysqlclient-dev pkg-config \
+            &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+            # Install app dependencies
+            RUN pip install mysqlclient
+            RUN pip install --no-cache-dir -r requirements.txt
+
+            COPY . /app/backend
+
+            EXPOSE 8000
+
+            CMD ["sh", "-c", "python manage.py migrate &amp;&amp; python manage.py runserver 0.0.0.0:8000"]</pre>
+        </div>
+
+        <h3>.dockerignore</h3>
+        <p>This file keeps the MySQL data folder out of the build. Without it, Docker tries to read files owned by the
+          MySQL container and the build stops with a permission error. The file name starts with a dot, has no
+          extension, and sits next to the <code>Dockerfile</code>.</p>
+        <div class="codeblock"><span class="cap">.dockerignore</span>
+          <pre class="code">data/
+            .git
+            __pycache__/
+            *.pyc</pre>
+        </div>
+
+        <h3>docker-compose.yml layout</h3>
+        <p>The three container names come from your project. The layout below is the recommended shape. Keep your own
+          environment values, and replace the old <code>./data/mysql/db</code> folder mount with a named volume so MySQL
+          files never appear in the project folder.</p>
+        <div class="codeblock"><span class="cap">docker-compose.yml (recommended)</span>
+          <pre class="code">services:
+            db:
+            image: mysql
+            container_name: db_cont
+            restart: always
+            environment:
+            MYSQL_ROOT_PASSWORD: change-me
+            MYSQL_DATABASE: notes_db
+            volumes:
+            - mysql_data:/var/lib/mysql
+            healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 10s
+            timeout: 5s
+            retries: 10
+            networks:
+            - notes-app
+
+            django_app:
+            build: .
+            container_name: django_cont
+            restart: always
+            ports:
+            - "8000:8000"
+            depends_on:
+            db:
+            condition: service_healthy
+            networks:
+            - notes-app
+
+            nginx:
+            build: ./nginx
+            container_name: nginx_cont
+            restart: always
+            ports:
+            - "80:80"
+            depends_on:
+            - django_app
+            networks:
+            - notes-app
+
+            volumes:
+            mysql_data:
+
+            networks:
+            notes-app:</pre>
+        </div>
+        <div class="note"><strong>Check before using.</strong> The service names, the <code>./nginx</code> build folder,
+          the database name and the password are placeholders. Match them to your real file. Remove the
+          <code>version:</code> line if it is still there, since Compose now ignores it and prints a warning.
+        </div>
+      </section>
+
+      <section id="deploy">
+        <h2>Run on EC2</h2>
+        <h3>1. Install Docker, Compose and Git</h3>
+        <div class="codeblock">
+          <pre class="code">sudo dnf update -y
+            sudo dnf install -y docker git
+            sudo systemctl enable --now docker
+            sudo usermod -aG docker ec2-user
+            # log out and log back in so the docker group applies</pre>
+        </div>
+        <p>Install the Compose plugin if <code>docker compose version</code> is not found:</p>
+        <div class="codeblock">
+          <pre class="code">sudo mkdir -p /usr/local/lib/docker/cli-plugins
+            sudo curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 \
+            -o /usr/local/lib/docker/cli-plugins/docker-compose
+            sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+            docker compose version</pre>
+        </div>
+        <p>Compose builds also need Buildx 0.17.0 or later. If you see <code>compose build requires buildx 0.17.0 or
+            later</code>, install a newer plugin:</p>
+        <div class="codeblock">
+          <pre class="code">sudo mkdir -p /usr/local/lib/docker/cli-plugins
+            sudo curl -SL https://github.com/docker/buildx/releases/download/v0.19.3/buildx-v0.19.3.linux-amd64 \
+            -o /usr/local/lib/docker/cli-plugins/docker-buildx
+            sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
+            docker buildx version</pre>
+        </div>
+
+        <h3>2. Get the code</h3>
+        <div class="codeblock">
+          <pre class="code">git clone https://github.com/itsmedaksh3048-blip/Django_Notes_App.git
+            cd Django_Notes_App</pre>
+        </div>
+
+        <h3>3. Build and start</h3>
+        <div class="codeblock">
+          <pre class="code">docker compose up --build -d
+            docker compose ps</pre>
+        </div>
+        <p>All three containers should show <code>Up</code>. Then open <code>http://&lt;ec2-public-ip&gt;</code> for
+          Nginx, or <code>http://&lt;ec2-public-ip&gt;:8000</code> for Django directly.</p>
+
+        <h3>4. Update after a code change</h3>
+        <div class="codeblock">
+          <pre class="code">cd Django_Notes_App
+            git pull origin main
+            docker compose down --remove-orphans
+            docker compose up --build -d</pre>
+        </div>
+        <p>Do not add <code>-v</code> to <code>docker compose down</code> unless you want to delete the MySQL data.</p>
+
+        <h3>Keeping the same IP</h3>
+        <p>A stopped and restarted EC2 instance gets a new public IP. A reboot keeps it. Attach an Elastic IP to keep
+          one address. An Elastic IP on a stopped instance is billed, so release it when you do not need it.</p>
+      </section>
+
+      <section id="issues">
+        <h2>Problems and fixes</h2>
+        <p>Each entry shows the symptom you saw and what resolved it.</p>
+
+        <article class="issue">
+          <header><span class="pill bad">Docker</span>
+            <h3>Compose build requires Buildx 0.17.0 or later</h3>
+          </header>
+          <div class="body">
+            <span class="err">compose build requires buildx 0.17.0 or later</span>
+            <p>The Buildx plugin that ships with Amazon Linux Docker is too old.</p>
+            <p><strong>Fix:</strong> install a newer Buildx plugin into <code>/usr/local/lib/docker/cli-plugins</code>,
+              as shown in the Run on EC2 section.</p>
+          </div>
+        </article>
+
+        <article class="issue">
+          <header><span class="pill bad">Docker</span>
+            <h3>Permission denied while loading the build context</h3>
+          </header>
+          <div class="body">
+            <span class="err">error from sender: open data/mysql/db/#innodb_redo: permission denied</span>
+            <p>The MySQL container wrote its files into <code>data/mysql/db</code> inside the project folder as its own
+              user. Docker could not read them when it sent the folder to the build. The log line <code>load
+                .dockerignore, transferring context: 2B</code> showed that no ignore file was in use.</p>
+            <p><strong>Fix:</strong> add a <code>.dockerignore</code> containing <code>data/</code>. Delete the leftover
+              folder once with <code>sudo rm -rf data</code> from the project folder. For a lasting fix, store MySQL
+              data in a named volume instead of a folder in the project.</p>
+          </div>
+        </article>
+
+        <article class="issue">
+          <header><span class="pill bad">Docker</span>
+            <h3>Port 8000 is already allocated</h3>
+          </header>
+          <div class="body">
+            <span class="err">Bind for 0.0.0.0:8000 failed: port is already allocated</span>
+            <p><code>ss -tlnp</code> showed <code>docker-proxy</code> still holding port 8000 although no container used
+              it. This is a stale forwarder left by a removed container.</p>
+            <p><strong>Fix:</strong> run <code>sudo systemctl restart docker</code>, check that <code>sudo ss -tlnp |
+                grep 8000</code> prints nothing, then start the stack again. Running <code>docker compose down
+                --remove-orphans</code> before every start keeps old containers from holding ports.</p>
+          </div>
+        </article>
+
+        <article class="issue">
+          <header><span class="pill warn">Container</span>
+            <h3>Container starts and exits straight away</h3>
+          </header>
+          <div class="body">
+            <span class="err">Exited (0), command "python3"</span>
+            <p>The image had no <code>CMD</code>, so Docker ran the Python interpreter, which closes when there is no
+              terminal. The earlier <code>django_cont</code> also showed <code>Restarting (1)</code>, which means the
+              app crashed on start, often because MySQL was not ready.</p>
+            <p><strong>Fix:</strong> add the <code>CMD</code> line to the Dockerfile, and make Django wait for MySQL
+              with a health check and <code>depends_on</code>. Read the cause with <code>docker logs
+                &lt;name&gt;</code>.</p>
+          </div>
+        </article>
+
+        <article class="issue">
+          <header><span class="pill ok">Info</span>
+            <h3>Warning that the version attribute is obsolete</h3>
+          </header>
+          <div class="body">
+            <p>Compose prints this warning because the top <code>version:</code> line in <code>docker-compose.yml</code>
+              is no longer used. It is harmless. Delete the line to remove it.</p>
+          </div>
+        </article>
+      </section>
+
+      <section id="commands">
+        <h2>Commands</h2>
+        <h3>Run and manage the stack</h3>
+        <div class="codeblock">
+          <pre class="code">cd Django_Notes_App
+            docker compose up --build -d
+            docker compose ps
+            docker compose logs -f django_app
+            docker compose down --remove-orphans</pre>
+        </div>
+
+        <h3>Run a single image</h3>
+        <div class="codeblock">
+          <pre class="code">docker run -d -p 8000:8000 --name notes notes-app:latest
+            docker logs notes
+            docker stop notes
+            docker rm -f notes</pre>
+        </div>
+        <p>A lone Django container cannot reach MySQL, so use Compose for the full app.</p>
+
+        <h3>Clean up Docker</h3>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Goal</th>
+                <th>Command</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Remove all containers, running or stopped</td>
+                <td class="mono">docker rm -f $(docker ps -aq)</td>
+              </tr>
+              <tr>
+                <td>Remove all images</td>
+                <td class="mono">docker rmi -f $(docker images -aq)</td>
+              </tr>
+              <tr>
+                <td>Remove unused containers, images, networks and cache</td>
+                <td class="mono">docker system prune -a -f</td>
+              </tr>
+              <tr>
+                <td>Also remove volumes (deletes MySQL data)</td>
+                <td class="mono">docker system prune -a --volumes -f</td>
+              </tr>
+              <tr>
+                <td>Remove only this project including its volumes</td>
+                <td class="mono">docker compose down -v --remove-orphans</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Inspect and troubleshoot</h3>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Goal</th>
+                <th>Command</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>List all containers</td>
+                <td class="mono">docker ps -a</td>
+              </tr>
+              <tr>
+                <td>See why a container stopped</td>
+                <td class="mono">docker logs &lt;name&gt;</td>
+              </tr>
+              <tr>
+                <td>Read the exit code</td>
+                <td class="mono">docker inspect &lt;name&gt; --format '{{.State.ExitCode}}'</td>
+              </tr>
+              <tr>
+                <td>Find what holds a port</td>
+                <td class="mono">sudo ss -tlnp | grep 8000</td>
+              </tr>
+              <tr>
+                <td>Restart Docker</td>
+                <td class="mono">sudo systemctl restart docker</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Add a swap file</h3>
+        <p>The EC2 instance has about 2 GB of memory and no swap. A swap file keeps builds from running out of memory.
+        </p>
+        <div class="codeblock">
+          <pre class="code">sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+            sudo chmod 600 /swapfile
+            sudo mkswap /swapfile
+            sudo swapon /swapfile
+            echo '/swapfile swap swap defaults 0 0' | sudo tee -a /etc/fstab</pre>
+        </div>
+      </section>
+
+      <footer>Passwords and key files stay out of this page and out of GitHub.</footer>
+    </div>
+
+    <script>
+      (function () {
+        document.querySelectorAll('.codeblock').forEach(function (block) {
+          var pre = block.querySelector('pre.code');
+          if (!pre) return;
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'copy';
+          btn.textContent = 'Copy';
+          btn.addEventListener('click', function () {
+            var text = pre.innerText;
+            function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); }
+            function fallback() {
+              var r = document.createRange(); r.selectNodeContents(pre);
+              var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+              btn.textContent = 'Selected';
+              setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+            }
+            try {
+              navigator.clipboard.writeText(text).then(done, fallback);
+            } catch (e) { fallback(); }
+          });
+          block.appendChild(btn);
+        });
+      })();
+    </script>
+
+    <!--claude-mermaid-runtime-begin:3477-->
+    <style>
+      .mermaid-diagram {
+        margin-block: 4px
+      }
+
+      .mermaid-diagram svg {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto
+      }
+    </style>
+    <script src="/_runtime/mermaid-11.16.1.min.js"></script>
+    <script>(function () {
+        var CFG = { "palettes": { "light": { "surface": "#f4efe4", "text": "#42392e", "line": "#8a7f6d", "border": "#7a6c52", "bg": "#fffdf8" }, "dark": { "surface": "#262b34", "text": "#f2f3f5", "line": "#a8adb8", "border": "#9aa4b8", "bg": "#1f232b" } } };
+        if (typeof mermaid === 'undefined') return;
+        var pres = Array.prototype.slice.call(document.querySelectorAll('pre.mermaid')).filter(function (p) { if (p.hasAttribute('data-claude-mermaid-claimed')) return false; p.setAttribute('data-claude-mermaid-claimed', '1'); return true; });
+        if (!pres.length) return;
+        var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+        var root = document.documentElement;
+        var items = pres.map(function (pre) {
+          var mount = document.createElement('div'); mount.className = 'mermaid-diagram';
+          return { pre: pre, mount: mount, src: pre.textContent || '' };
+        });
+        var seq = 0;
+        var renderGen = 0;
+        var lastKey = '';
+        function pageBg(fallback) {
+          var els = [document.body, document.documentElement];
+          for (var i = 0; i < els.length; i++) {
+            var c = els[i] && getComputedStyle(els[i]).backgroundColor;
+            if (c && c !== 'transparent' && c !== 'rgba(0, 0, 0, 0)') return c;
+          }
+          return fallback;
+        }
+        function render() {
+          var theme = root.getAttribute('data-theme');
+          var dark = theme === 'dark' || (!!(mq && mq.matches) && theme !== 'light');
+          var pal = dark ? CFG.palettes.dark : CFG.palettes.light;
+          var bg = pageBg(pal.bg);
+          var key = (dark ? 'd' : 'l') + '|' + bg;
+          if (key === lastKey) return;
+          lastKey = key;
+          var gen = ++renderGen;
+          var font = getComputedStyle(document.body).fontFamily || 'sans-serif';
+          var nat = { useMaxWidth: false };
+          mermaid.initialize({
+            startOnLoad: false, securityLevel: 'strict', theme: 'base',
+            flowchart: nat, sequence: nat, er: nat, state: nat, class: nat, pie: nat,
+            gantt: nat, journey: nat, timeline: nat, gitGraph: nat, mindmap: nat, xyChart: nat,
+            quadrantChart: nat, sankey: nat, c4: nat, requirement: nat, block: nat,
+            packet: nat, kanban: nat, architecture: nat, radar: nat,
+            themeVariables: {
+              background: bg, mainBkg: pal.surface, primaryColor: pal.surface,
+              primaryTextColor: pal.text, lineColor: pal.line, primaryBorderColor: pal.border,
+              nodeBorder: pal.border, clusterBorder: pal.border, edgeLabelBackground: bg,
+              clusterBkg: 'rgba(127,127,127,0.07)', titleColor: pal.text,
+              darkMode: dark, rowOdd: bg, rowEven: 'rgba(127,127,127,0.07)',
+              attributeBackgroundColorOdd: bg, attributeBackgroundColorEven: 'rgba(127,127,127,0.07)',
+              fontSize: '16px', fontFamily: font
+            },
+            themeCSS: '.node rect, .node circle, .node polygon, .node path, .cluster rect { stroke-width: 2px; }'
+          });
+          items.forEach(function (it) {
+            var id = 'claude-mermaid-' + seq++;
+            mermaid.render(id, it.src).then(function (r) {
+              if (gen !== renderGen) return;
+              var prev = it.pre.previousElementSibling;
+              if (prev && prev.className === 'mermaid-diagram' && prev !== it.mount) return;
+              it.mount.innerHTML = r.svg;
+              if (!it.mount.parentNode) it.pre.parentNode.insertBefore(it.mount, it.pre);
+              it.pre.style.display = 'none';
+            }, function () {
+              var scratch = document.getElementById(id);
+              if (scratch) scratch.parentNode.removeChild(scratch);
+              scratch = document.getElementById('d' + id);
+              if (scratch) scratch.parentNode.removeChild(scratch);
+              if (gen !== renderGen) return;
+              if (it.mount.parentNode) it.mount.parentNode.removeChild(it.mount);
+              it.pre.style.display = '';
+            });
+          });
+        }
+        render();
+        if (mq && mq.addEventListener) mq.addEventListener('change', render);
+        if (typeof MutationObserver !== 'undefined') new MutationObserver(render).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+      })();</script>
+    <!--claude-mermaid-runtime-end-->
+
+  </body>
+
+</html>
