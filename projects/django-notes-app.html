@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <title>Django Notes App | Sonu Kumar</title>
+        <meta name="description"
+            content="A notes web app built with Django and MySQL, served by Nginx, packaged with Docker Compose and deployed on AWS EC2.">
+        <meta name="theme-color" content="#080d18">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/project.css">
+    </head>
+
+    <body>
+
+        <!-- NAVIGATION (same bar as the portfolio) -->
+        <header class="site">
+            <div class="in bar">
+                <a class="brand" href="../index.html#home"><b>&gt;_</b> sonu</a>
+                <div class="bar-right">
+                    <nav aria-label="Main menu">
+                        <ul class="menu">
+                            <li><a href="../index.html#home">Home</a></li>
+                            <li><a href="../index.html#about">About</a></li>
+                            <li><a href="../index.html#skills">Skills</a></li>
+                            <li><a href="../index.html#projects" aria-current="true">Projects</a></li>
+                            <li><a href="../index.html#contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <button class="theme" id="themeBtn" type="button" aria-label="Switch colour theme"></button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- HERO -->
+            <section class="p-hero">
+                <div class="in">
+                    <a class="back" href="../index.html#projects">&larr; All projects</a>
+
+                    <div class="p-grid">
+                        <div>
+                            <span class="eyebrow">Project</span>
+                            <h1 class="p-title">Django <span>Notes</span> App</h1>
+                            <p class="p-lead">
+                                A notes website written in Django. Notes are stored in MySQL, Nginx sits in front and
+                                forwards
+                                traffic to Django, and the whole stack runs as three Docker containers on an AWS EC2
+                                server,
+                                started with a single command.
+                            </p>
+                            <div class="tags">
+                                <span class="tag">Django</span>
+                                <span class="tag">MySQL</span>
+                                <span class="tag">Nginx</span>
+                                <span class="tag">Docker Compose</span>
+                                <span class="tag">AWS EC2</span>
+                            </div>
+                            <div class="p-actions">
+                                <a class="btn primary" href="https://github.com/itsmedaksh3048-blip/Django_Notes_App"
+                                    target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path
+                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                                    </svg>
+                                    View on GitHub
+                                </a>
+                                <a class="btn" href="#screens">See screenshots</a>
+                            </div>
+                        </div>
+
+                        <dl class="details p-facts">
+                            <dt>Backend</dt>
+                            <dd>Django on Python 3.9</dd>
+                            <dt>Database</dt>
+                            <dd>MySQL 8.0</dd>
+                            <dt>Web server</dt>
+                            <dd>Nginx 1.23.3 (alpine)</dd>
+                            <dt>Packaging</dt>
+                            <dd>Docker, Docker Compose</dd>
+                            <dt>Hosting</dt>
+                            <dd>AWS EC2, Amazon Linux</dd>
+                            <dt>Containers</dt>
+                            <dd>nginx, django_cont, mysql</dd>
+                        </dl>
+                    </div>
+                </div>
+            </section>
+
+            <nav class="subnav" aria-label="Sections on this page">
+                <div class="in">
+                    <a href="#screens">Screenshots</a>
+                    <a href="#architecture">Architecture</a>
+                    <a href="#docker">Docker files</a>
+                    <a href="#deploy">Run on EC2</a>
+                    <a href="#issues">Problems and fixes</a>
+                    <a href="#commands">Commands</a>
+                </div>
+            </nav>
+
+            <div class="in">
+
+                <!-- SCREENSHOTS -->
+                <section class="p-sec" id="screens">
+                    <span class="eyebrow">live on EC2</span>
+                    <h2>Screenshots</h2>
+                    <p>
+                        The app running from the EC2 server. Notes show a title, a short preview and the date. The
+                        <strong>+</strong> button adds a new note, and opening a note shows the full text with a
+                        <strong>Delete</strong> option.
+                    </p>
+
+                    <div class="shots">
+                        <figure class="shot">
+                            <img src="../src/images/django-notes-list.png" width="651" height="1001"
+                                alt="My Notes screen listing two notes with their dates and an orange plus button to add a note"
+                                loading="lazy">
+                            <figcaption><b>Notes list</b>All notes at a glance, with a note count and the add button.
+                            </figcaption>
+                        </figure>
+
+                        <figure class="shot">
+                            <img src="../src/images/django-note-detail.png" width="675" height="987"
+                                alt="A single note opened with a back arrow and a Delete button" loading="lazy">
+                            <figcaption><b>Note detail</b>Read the full note, go back, or delete it.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="term termshot">
+                        <div class="term-bar">
+                            <i></i><i></i><i></i>
+                            <span>ec2-user@ip-172-31-17-222: docker ps</span>
+                        </div>
+                        <div class="term-body">
+                            <img src="../src/images/django-containers.png" width="1917" height="445"
+                                alt="Terminal on the EC2 server showing the nginx, django_cont and mysql containers all running"
+                                loading="lazy">
+                        </div>
+                    </div>
+                    <p class="termcap">
+                        <strong>Three containers, one stack.</strong> <code>docker ps</code> on the server shows
+                        <code>nginx</code> on port 80, <code>django_cont</code> on 8000 and <code>mysql</code> on 3306.
+                        Django and MySQL both report <code>healthy</code>.
+                    </p>
+                </section>
+
+                <!-- ARCHITECTURE -->
+                <section class="p-sec" id="architecture">
+                    <h2>Architecture</h2>
+
+                    <h3>How a request reaches a note</h3>
+                    <div class="flow">
+                        <code>Browser</code><i>&rarr;</i><small>:80</small><i>&rarr;</i>
+                        <code>nginx</code><i>&rarr;</i><small>:8000</small><i>&rarr;</i>
+                        <code>django_cont</code><i>&rarr;</i><small>:3306</small><i>&rarr;</i>
+                        <code>mysql</code>
+                    </div>
+
+                    <h3>How code reaches the server</h3>
+                    <div class="flow">
+                        <code>GitHub main</code><i>&rarr;</i><small>git pull</small><i>&rarr;</i>
+                        <code>EC2 server</code><i>&rarr;</i><small>docker compose up --build -d</small><i>&rarr;</i>
+                        <code>3 containers</code>
+                    </div>
+                    <p>To update the app, pull the latest code on the server and rebuild the containers.</p>
+
+                    <h3>Ports</h3>
+                    <div class="tablewrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Port</th>
+                                    <th>Used for</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Nginx</td>
+                                    <td class="mono">80</td>
+                                    <td>Public entry to the notes app</td>
+                                </tr>
+                                <tr>
+                                    <td>Django</td>
+                                    <td class="mono">8000</td>
+                                    <td>Application server inside the stack</td>
+                                </tr>
+                                <tr>
+                                    <td>MySQL</td>
+                                    <td class="mono">3306</td>
+                                    <td>Database, used by the other containers</td>
+                                </tr>
+                                <tr>
+                                    <td>SSH</td>
+                                    <td class="mono">22</td>
+                                    <td>Login to the server</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Open ports 80 and 8000 in the EC2 security group to reach the app, and limit port 22 to your own
+                        IP.</p>
+                </section>
+
+                <!-- DOCKER FILES -->
+                <section class="p-sec" id="docker">
+                    <h2>Docker files</h2>
+
+                    <h3>Dockerfile for the Django container</h3>
+                    <p>
+                        The original file had no start command, so a container started from it ran plain
+                        <code>python3</code>
+                        and exited with code 0. The last line fixes that. Migrations run when the container starts,
+                        because
+                        MySQL is not available while the image is being built.
+                    </p>
+                    <div class="codeblock"><span class="cap">Dockerfile</span>
+                        <pre><code>FROM python:3.9
+
+                                WORKDIR /app/backend
+
+                                COPY requirements.txt /app/backend
+                                RUN apt-get update \
+                                &amp;&amp; apt-get upgrade -y \
+                                &amp;&amp; apt-get install -y gcc default-libmysqlclient-dev pkg-config \
+                                &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+                                # Install app dependencies
+                                RUN pip install mysqlclient
+                                RUN pip install --no-cache-dir -r requirements.txt
+
+                                COPY . /app/backend
+
+                                EXPOSE 8000
+
+                                CMD ["sh", "-c", "python manage.py migrate &amp;&amp; python manage.py runserver
+                                0.0.0.0:8000"]</code></pre>
+                    </div>
+
+                    <h3>.dockerignore</h3>
+                    <p>
+                        This keeps the MySQL data folder out of the build. Without it, Docker tries to read files owned
+                        by the
+                        MySQL container and the build stops with a permission error. The file sits next to the
+                        <code>Dockerfile</code>, starts with a dot and has no extension.
+                    </p>
+                    <div class="codeblock"><span class="cap">.dockerignore</span>
+                        <pre><code>data/
+                                .git
+                                __pycache__/
+                                *.pyc</code></pre>
+                    </div>
+
+                    <h3>docker-compose.yml layout</h3>
+                    <p>
+                        The layout below is the recommended shape. MySQL files live in a named volume, so they never
+                        appear in
+                        the project folder.
+                    </p>
+                    <div class="codeblock"><span class="cap">docker-compose.yml (recommended)</span>
+                        <pre><code>services:
+                                mysql:
+                                image: mysql:8.0
+                                container_name: mysql
+                                restart: always
+                                environment:
+                                MYSQL_ROOT_PASSWORD: change-me
+                                MYSQL_DATABASE: notes_db
+                                volumes:
+                                - mysql_data:/var/lib/mysql
+                                healthcheck:
+                                test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+                                interval: 10s
+                                timeout: 5s
+                                retries: 10
+                                networks:
+                                - notes-app
+
+                                django:
+                                build: .
+                                container_name: django_cont
+                                restart: always
+                                ports:
+                                - "8000:8000"
+                                depends_on:
+                                mysql:
+                                condition: service_healthy
+                                networks:
+                                - notes-app
+
+                                nginx:
+                                build: ./nginx
+                                container_name: nginx
+                                restart: always
+                                ports:
+                                - "80:80"
+                                depends_on:
+                                - django
+                                networks:
+                                - notes-app
+
+                                volumes:
+                                mysql_data:
+
+                                networks:
+                                notes-app:</code></pre>
+                    </div>
+                    <div class="note"><strong>Check before using.</strong> The database name, the password and the
+                        <code>./nginx</code> build folder are placeholders. Match them to your real file. Remove the
+                        <code>version:</code> line if it is still there, since Compose now ignores it and prints a
+                        warning.
+                    </div>
+                </section>
+
+                <!-- DEPLOY -->
+                <section class="p-sec" id="deploy">
+                    <h2>Run on EC2</h2>
+
+                    <h3>1. Install Docker and Git</h3>
+                    <div class="codeblock">
+                        <pre><code>sudo dnf update -y
+                                sudo dnf install -y docker git
+                                sudo systemctl enable --now docker
+                                sudo usermod -aG docker ec2-user
+                                # log out and log back in so the docker group applies</code></pre>
+                    </div>
+                    <p>Install the Compose plugin if <code>docker compose version</code> is not found:</p>
+                    <div class="codeblock">
+                        <pre><code>sudo mkdir -p /usr/local/lib/docker/cli-plugins
+                                sudo curl -SL
+                                https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 \
+                                -o /usr/local/lib/docker/cli-plugins/docker-compose
+                                sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+                                docker compose version</code></pre>
+                    </div>
+                    <p>Compose builds also need Buildx 0.17.0 or later. If you see
+                        <code>compose build requires buildx 0.17.0 or later</code>, install a newer plugin:
+                    </p>
+                    <div class="codeblock">
+                        <pre><code>sudo curl -SL
+                                https://github.com/docker/buildx/releases/download/v0.19.3/buildx-v0.19.3.linux-amd64 \
+                                -o /usr/local/lib/docker/cli-plugins/docker-buildx
+                                sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
+                                docker buildx version</code></pre>
+                    </div>
+
+                    <h3>2. Get the code</h3>
+                    <div class="codeblock">
+                        <pre><code>git clone https://github.com/itsmedaksh3048-blip/Django_Notes_App.git
+                                cd Django_Notes_App</code></pre>
+                    </div>
+
+                    <h3>3. Build and start</h3>
+                    <div class="codeblock">
+                        <pre><code>docker compose up --build -d
+                                docker compose ps</code></pre>
+                    </div>
+                    <p>All three containers should show <code>Up</code>. Then open
+                        <code>http://&lt;ec2-public-ip&gt;</code> for
+                        Nginx, or <code>http://&lt;ec2-public-ip&gt;:8000</code> for Django directly.</p>
+
+                    <h3>4. Update after a code change</h3>
+                    <div class="codeblock">
+                        <pre><code>cd Django_Notes_App
+                                git pull origin main
+                                docker compose down --remove-orphans
+                                docker compose up --build -d</code></pre>
+                    </div>
+                    <p>Do not add <code>-v</code> to <code>docker compose down</code> unless you want to delete the
+                        MySQL data.</p>
+
+                    <h3>Keeping the same IP</h3>
+                    <p>
+                        A stopped and restarted EC2 instance gets a new public IP, while a reboot keeps it. Attach an
+                        Elastic IP
+                        to keep one address. An Elastic IP on a stopped instance is billed, so release it when you do
+                        not need it.
+                    </p>
+                </section>
+
+                <!-- PROBLEMS AND FIXES -->
+                <section class="p-sec" id="issues">
+                    <h2>Problems and fixes</h2>
+                    <p>Each entry shows the symptom I saw and what resolved it.</p>
+
+                    <article class="issue">
+                        <div class="issue-head"><span class="pill">Docker</span>
+                            <h3>Compose build requires Buildx 0.17.0 or later</h3>
+                        </div>
+                        <div class="issue-body">
+                            <span class="err">compose build requires buildx 0.17.0 or later</span>
+                            <p>The Buildx plugin that ships with Docker on Amazon Linux is too old.</p>
+                            <p><strong>Fix:</strong> install a newer Buildx plugin into
+                                <code>/usr/local/lib/docker/cli-plugins</code>,
+                                as shown in the Run on EC2 section.</p>
+                        </div>
+                    </article>
+
+                    <article class="issue">
+                        <div class="issue-head"><span class="pill">Docker</span>
+                            <h3>Permission denied while loading the build context</h3>
+                        </div>
+                        <div class="issue-body">
+                            <span class="err">error from sender: open data/mysql/db/#innodb_redo: permission
+                                denied</span>
+                            <p>The MySQL container wrote its files into <code>data/mysql/db</code> inside the project
+                                folder as its
+                                own user, and Docker could not read them when it sent the folder to the build. The log
+                                line
+                                <code>load .dockerignore, transferring context: 2B</code> showed that no ignore file was
+                                in use.
+                            </p>
+                            <p><strong>Fix:</strong> add a <code>.dockerignore</code> containing <code>data/</code>, and
+                                delete the
+                                leftover folder once with <code>sudo rm -rf data</code>. For a lasting fix, store MySQL
+                                data in a named
+                                volume instead of a folder in the project.</p>
+                        </div>
+                    </article>
+
+                    <article class="issue">
+                        <div class="issue-head"><span class="pill">Docker</span>
+                            <h3>Port 8000 is already allocated</h3>
+                        </div>
+                        <div class="issue-body">
+                            <span class="err">Bind for 0.0.0.0:8000 failed: port is already allocated</span>
+                            <p><code>ss -tlnp</code> showed <code>docker-proxy</code> still holding port 8000 although
+                                no container
+                                used it. It was a stale forwarder left by a removed container.</p>
+                            <p><strong>Fix:</strong> run <code>sudo systemctl restart docker</code>, check that
+                                <code>sudo ss -tlnp | grep 8000</code> prints nothing, then start the stack again.
+                                Running
+                                <code>docker compose down --remove-orphans</code> before every start keeps old
+                                containers from holding
+                                ports.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="issue">
+                        <div class="issue-head"><span class="pill warn">Container</span>
+                            <h3>Container starts and exits straight away</h3>
+                        </div>
+                        <div class="issue-body">
+                            <span class="err">Exited (0), command "python3"</span>
+                            <p>The image had no <code>CMD</code>, so Docker ran the Python interpreter, which closes
+                                when there is no
+                                terminal. The earlier <code>django_cont</code> also showed <code>Restarting (1)</code>,
+                                which means the
+                                app crashed on start, often because MySQL was not ready.</p>
+                            <p><strong>Fix:</strong> add the <code>CMD</code> line to the Dockerfile, and make Django
+                                wait for MySQL
+                                with a health check and <code>depends_on</code>. Read the cause with
+                                <code>docker logs &lt;name&gt;</code>.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="issue">
+                        <div class="issue-head"><span class="pill warn">Info</span>
+                            <h3>Warning that the version attribute is obsolete</h3>
+                        </div>
+                        <div class="issue-body">
+                            <p>Compose prints this warning because the top <code>version:</code> line in
+                                <code>docker-compose.yml</code> is no longer used. It is harmless. Delete the line to
+                                remove it.
+                            </p>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- COMMANDS -->
+                <section class="p-sec" id="commands">
+                    <h2>Commands</h2>
+
+                    <h3>Run and manage the stack</h3>
+                    <div class="codeblock">
+                        <pre><code>cd Django_Notes_App
+                                docker compose up --build -d
+                                docker compose ps
+                                docker compose logs -f django
+                                docker compose down --remove-orphans</code></pre>
+                    </div>
+
+                    <h3>Clean up Docker</h3>
+                    <div class="tablewrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Goal</th>
+                                    <th>Command</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Remove all containers, running or stopped</td>
+                                    <td class="mono">docker rm -f $(docker ps -aq)</td>
+                                </tr>
+                                <tr>
+                                    <td>Remove all images</td>
+                                    <td class="mono">docker rmi -f $(docker images -aq)</td>
+                                </tr>
+                                <tr>
+                                    <td>Remove unused containers, images, networks and cache</td>
+                                    <td class="mono">docker system prune -a -f</td>
+                                </tr>
+                                <tr>
+                                    <td>Also remove volumes (deletes MySQL data)</td>
+                                    <td class="mono">docker system prune -a --volumes -f</td>
+                                </tr>
+                                <tr>
+                                    <td>Remove only this project including its volumes</td>
+                                    <td class="mono">docker compose down -v --remove-orphans</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Inspect and troubleshoot</h3>
+                    <div class="tablewrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Goal</th>
+                                    <th>Command</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>List all containers</td>
+                                    <td class="mono">docker ps -a</td>
+                                </tr>
+                                <tr>
+                                    <td>See why a container stopped</td>
+                                    <td class="mono">docker logs &lt;name&gt;</td>
+                                </tr>
+                                <tr>
+                                    <td>Read the exit code</td>
+                                    <td class="mono">docker inspect &lt;name&gt; --format '{{.State.ExitCode}}'</td>
+                                </tr>
+                                <tr>
+                                    <td>Find what holds a port</td>
+                                    <td class="mono">sudo ss -tlnp | grep 8000</td>
+                                </tr>
+                                <tr>
+                                    <td>Restart Docker</td>
+                                    <td class="mono">sudo systemctl restart docker</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Add a swap file</h3>
+                    <p>The EC2 instance has about 2 GB of memory and no swap. A swap file keeps builds from running out
+                        of memory.</p>
+                    <div class="codeblock">
+                        <pre><code>sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+                                sudo chmod 600 /swapfile
+                                sudo mkswap /swapfile
+                                sudo swapon /swapfile
+                                echo '/swapfile swap swap defaults 0 0' | sudo tee -a /etc/fstab</code></pre>
+                    </div>
+                </section>
+
+                <p class="copy p-foot">Passwords and key files stay out of this page and out of GitHub.</p>
+            </div>
+        </main>
+
+        <footer class="foot-wrap">
+            <div class="in foot">
+                <a class="soc" href="../index.html#projects">&larr; Back to portfolio</a>
+                <p class="copy">&copy; <span id="yr">2026</span> Sonu Kumar. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <script>
+            (function () {
+                var root = document.documentElement;
+                var SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+                var MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+                var btn = document.getElementById("themeBtn");
+
+                try {
+                    var saved = localStorage.getItem("portfolio-theme");
+                    if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
+                } catch (e) { }
+
+                function effective() {
+                    var t = root.getAttribute("data-theme");
+                    return t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+                }
+                function paint() {
+                    var dark = effective() === "dark";
+                    btn.innerHTML = dark ? SUN : MOON;
+                    btn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+                }
+                paint();
+                btn.addEventListener("click", function () {
+                    var next = effective() === "dark" ? "light" : "dark";
+                    root.setAttribute("data-theme", next);
+                    try { localStorage.setItem("portfolio-theme", next); } catch (e) { }
+                    paint();
+                });
+
+                document.getElementById("yr").textContent = new Date().getFullYear();
+
+                /* Copy buttons on code blocks */
+                document.querySelectorAll(".codeblock").forEach(function (block) {
+                    var pre = block.querySelector("pre");
+                    if (!pre) return;
+                    var b = document.createElement("button");
+                    b.type = "button"; b.className = "mini"; b.textContent = "Copy";
+                    b.addEventListener("click", function () {
+                        function done() { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1500); }
+                        function fallback() {
+                            var r = document.createRange(); r.selectNodeContents(pre);
+                            var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+                            b.textContent = "Selected"; setTimeout(function () { b.textContent = "Copy"; }, 1500);
+                        }
+                        try { navigator.clipboard.writeText(pre.innerText).then(done, fallback); } catch (e) { fallback(); }
+                    });
+                    block.appendChild(b);
+                });
+            })();
+        </script>
+
+    </body>
+
+</html>

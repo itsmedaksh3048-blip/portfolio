@@ -2,579 +2,459 @@
 <html lang="en">
 
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#000" />
-    <meta property="og:image" content="src/png/Preview-card-min.png" />
-    <meta property="og:title" content="Daksh Prajapati | Portfolio" />
-    <meta property="og:url" content="https://github.com/itsmedaksh3048-blip" />
-    <meta property="og:site_name" content="Daksh Prajapati Portfolio" />
-    <title>Sonu Kumar | Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="src/png/main-favicon.png" />
-    <!-- aos cdn -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- stylesheet -->
-    <link rel="stylesheet" href="style.css" />
-    <!-- google fonts-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sonu Kumar | DevOps Engineer & Cybersecurity Enthusiast</title>
+    <link rel="icon" type="image/x-icon" href="src/images/logo.png" />
+
+    <meta name="description"
+      content="Sonu Kumar - BCA student learning DevOps engineering, AWS Cloud, Linux, Docker, Jenkins, CI/CD and exploring Cybersecurity.">
+    <meta name="keywords" content="Sonu Kumar, DevOps, AWS, Linux, Docker, Jenkins, Git, GitHub, Cybersecurity, BCA">
+    <meta name="author" content="Sonu Kumar">
+    <meta name="theme-color" content="#080d18">
+
+    <meta property="og:title" content="Sonu Kumar | DevOps & Cybersecurity">
+    <meta property="og:description" content="Exploring DevOps, Cloud Computing, Automation and Cybersecurity.">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Passions+Conflict&family=Orbitron&family=Fira+Code&family=Six+Caps" />
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+    <link rel="stylesheet" href="css/style.css">
   </head>
 
-  <body class="body">
-    <audio loop="" id="audioPlayer" style="display: none">
-      <source src="src/mp3/preloader.mp3" type="audio/mp3" />
-    </audio>
-    <div id="preloader"></div>
-    <noscript>Allow Javascript</noscript>
+  <body>
 
-    <header>
-      <div class="cursor-inner" id="cursor-inner"></div>
-      <div class="cursor-outer" id="cursor-outer"></div>
+    <!-- NAVIGATION -->
+    <header class="site">
+      <div class="in bar">
 
-      <div class="navbar" id="navbar">
-        <div class="hey">Hey!</div>
-        <div class="logo" tabindex="0" aria-label="daksh prajapati logo">
-          <div class="logo-top">
-            <img src="src/png/nav-avatar.png" alt="animation-head" id="nav-avatar" />
-          </div>
+        <a class="brand" href="#home" data-nav>
+          <b>&gt;_</b> sonu
+        </a>
+
+        <div class="bar-right">
+          <nav aria-label="Main menu">
+            <ul class="menu">
+              <li><a href="#home" data-nav="home">Home</a></li>
+              <li><a href="#about" data-nav="about">About</a></li>
+              <li><a href="#skills" data-nav="skills">Skills</a></li>
+              <li><a href="#projects" data-nav="projects">Projects</a></li>
+              <li><a href="#contact" data-nav="contact">Contact</a></li>
+            </ul>
+          </nav>
+
+          <button class="theme" id="themeBtn" type="button" aria-label="Switch colour theme"></button>
         </div>
-        <div class="navbar-tabs" id="navbar-tabs">
-          <ul class="navbar-tabs-ul">
-            <li class="home activeThistab" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="100">
-              <a href="#home" tabindex="0" aria-label="Home menu button">
-                Home
-              </a>
-            </li>
-
-            <li class="about" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="300">
-              <a href="#about" aria-label="about menu button">
-                AboutMe
-              </a>
-            </li>
-
-            <li class="skills" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="500">
-              <a href="#skills" aria-label="skills menu button">
-                Skills
-              </a>
-            </li>
-
-            <li class="projects" class="navbar-tabs-li" data-aos="fade-down" data-aos-delay="700">
-              <a href="#projects" aria-label="projects menu button">
-                Projects
-              </a>
-            </li>
-          </ul>
-        </div>
-        <!-- navbar tabs ends -->
       </div>
     </header>
-    <!-- header ends here -->
 
-    <main>
-      <!-- hamburger -->
-      <div class="hamburger" id="hamburger" data-aos="fade">
-        <div class="hamburgerbase">
-          <button id="hamburger-button" onclick="hamburgerMenu()" tabindex="0" aria-label="Menu Button">
-            <span class="burger-bar" id="burger-bar1"></span>
-            <span class="burger-bar" id="burger-bar2"></span>
-            <span class="burger-bar" id="burger-bar3"></span>
-          </button>
-        </div>
-      </div>
-      <!-- hamburger -->
-      <div class="mobiletogglemenu" id="mobiletogglemenu">
-        <ul class="mobile-navbar-tabs-ul" id="mobile-ul">
-          <li id="home-mobile-tab" class="mobile-navbar-tabs-li home activeThismobiletab" onclick="hidemenubyli()">
-            <a href="#home" tabindex="0" aria-label="Home menu button">
-              Home
-            </a>
-          </li>
 
-          <li id="aboutme-mobile-tab" class="mobile-navbar-tabs-li about" onclick="hidemenubyli()">
-            <a href="#about" tabindex="0" aria-label="about menu button">
-              AboutMe
-            </a>
-          </li>
-          <li id="skills-mobile-tab" class="mobile-navbar-tabs-li skills" onclick="hidemenubyli()">
-            <a href="#skills" tabindex="0" aria-label="skills menu button">
-              Skills
-            </a>
-          </li>
-          <li id="projects-mobile-tab" class="mobile-navbar-tabs-li projects" onclick="hidemenubyli()">
-            <a href="#projects" tabindex="0" aria-label="projects menu button">
-              Projects
-            </a>
-          </li>
-        </ul>
-      </div>
-      <!-- mobile toggle menu ends -->
+    <main id="main">
 
-      <section class="landing-page-container" id="home">
-        <div class="blob"></div>
+      <!-- HOME SECTION -->
+      <section id="home" class="hero">
 
-        <div class="text-content">
-          <article id="hello-friend" data-aos="fade-up" data-aos-delay="0">
-            <p class="jello">H</p>
-            <p class="jello">e</p>
-            <p class="jello">l</p>
-            <p class="jello">l</p>
-            <p class="jello">o</p>
-            <p class="jello">(</p>
-            <p class="jello">)</p>
-            <p class="jello">;</p>
-            &nbsp;
-            <p class="jello">I</p>
-            <p class="jello">'</p>
-            <p class="jello">m</p>
-          </article>
-          <article id="name" data-aos="fade-up" data-aos-delay="200">
-            <p class="jello">S</p>
-            <p class="jello">o</p>
-            <p class="jello">n</p>
-            <p class="jello">u</p>
-            &nbsp;
-            <p class="jello">K</p>
-            <p class="jello">u</p>
-            <p class="jello">m</p>
-            <p class="jello">a</p>
-            <p class="jello">r</p>
-            <p class="jello">.</p>
-          </article>
+        <div class="in hero-grid">
 
-          <article id="work" data-aos="fade-up" data-aos-delay="400">
-            <div>
-              <p class="jello">D</p>
-              <p class="jello">e</p>
-              <p class="jello">v</p>
-              <p class="jello">O</p>
-              <p class="jello">p</p>
-              <p class="jello">s</p>
-              </div>
-              <div>
-                <p class="jello">E</p>
-                <p class="jello">n</p>
-                <p class="jello">g</p>
-                <p class="jello">i</p>
-                <p class="jello">n</p>
-                <p class="jello">e</p>
-                <p class="jello">e</p>
-                <p class="jello">r</p>
-                <p class="jello">.</p>
-              
-            </div>
-            <div>
-              <p class="jello">&</p>
-            </div>
-            <div>
-              <p class="jello">C</p>
-              <p class="jello">y</p>
-              <p class="jello">b</p>
-              <p class="jello">e</p>
-              <p class="jello">r</p>
-              <p class="jello">s</p>
-              <p class="jello">e</p>
-              <p class="jello">c</p>
-              <p class="jello">u</p>
-              <p class="jello">r</p>
-              <p class="jello">i</p>
-              <p class="jello">t</p>
-              <p class="jello">y</p>
-            </div>
-          </article>
-          <p id="info-para" data-aos="fade-up" data-aos-delay="600">
-            Aspiring Cyber Security, Ethical Hacking & Cloud Engineer. Passionate about securing digital systems,
-            optimizing modern cloud architectures, and leveraging automation pipelines.
-          </p>
-          <div class="contact-btn-div" data-aos="fade-up" data-aos-delay="800">
-            <a href="mailto:itsmedaksh3048@gmail.com" tabindex="-1">
-              <button class="letsTalkBtn">
-                <p class="letsTalkBtn-text">Let's Talk!</p>
-                <span class="letsTalkBtn-BG"></span>
-              </button></a>
+          <div class="hero-copy">
 
-            <!-- FIXED SETTING AND TOGGLE PANEL -->
-            <div class="setting-container" id="setting-container">
-              <input type="checkbox" id="switchforsetting" onclick="settingtoggle()" />
+            <p class="status">
+              <span class="dot"></span>
+              DevOps Engineering &middot; Cybersecurity Enthusiast
+            </p>
 
-              <label for="switchforsetting" class="needtobeinvert" id="labelforsetting" tabindex="0"
-                aria-label="settings for sound and appearance">
-                <!-- Settings Gear Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                  style="vertical-align: middle;">
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path
-                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
-                  </path>
+            <h1>
+              Hi, I'm <span class="name" data-name>Sonu Kumar</span>.
+            </h1>
+
+            <p class="role">
+              Aspiring DevOps Engineer
+              <span class="amp">&amp;</span>
+              Cybersecurity Enthusiast
+            </p>
+
+            <p class="typed-line">
+              <span class="pr">$</span>
+              <span id="typed">learning DevOps and Cloud Technologies</span>
+              <span class="caret"></span>
+            </p>
+
+            <div class="cta">
+
+              <a class="btn primary" id="mailBtn" href="mailto:itsmedaksh3048@gmail.com">
+
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
                 </svg>
-              </label>
 
-              <div class="visualmodetogglebuttoncontainer" id="visualmodetogglebuttoncontainer">
-                <input type="checkbox" id="switchforvisualmode" onclick="visualmode()" />
-                <label for="switchforvisualmode" id="labelforvisualmode" tabindex="0" aria-label="switch appearance">
-                  <!-- Explicitly binding fills and strokes to the theme baseline engine -->
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
-                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                    style="vertical-align: middle;">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                  </svg>
-                </label>
+                Contact Me
+              </a>
+
+              <div class="mail-chip">
+                <span id="mailText" data-email>itsmedaksh3048@gmail.com</span>
+                <button class="mini" id="copyMail" type="button">Copy</button>
               </div>
 
-              <div class="soundtogglebuttoncontainer" id="soundtogglebuttoncontainer">
-                <input type="checkbox" id="switchforsound" onclick="playpause()" />
-                <label for="switchforsound" id="labelforsound" tabindex="0" aria-label="switch sound"
-                  class="needtobeinvert">
-                  <!-- Volume/Sound Icon -->
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                    style="vertical-align: middle;">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                  </svg>
-                </label>
-              </div>
             </div>
-            <!-- setting div ends -->
           </div>
-          <!-- contact-btn-div -->
+
+
+          <!-- TERMINAL -->
+          <div class="term" aria-label="DevOps learning terminal">
+
+            <div class="term-bar">
+              <i></i><i></i><i></i>
+              <span>~/devops-journey</span>
+            </div>
+
+            <div class="term-body">
+
+              <div class="ln">
+                <span class="u">sonu@portfolio</span>:~$ whoami
+              </div>
+
+              <div class="ln out">
+                BCA Student | Aspiring DevOps Engineer
+              </div>
+
+              <div class="ln">
+                <span class="u">sonu@portfolio</span>:~$ cat learning.txt
+              </div>
+
+              <div class="ln out">
+                linux &middot; aws &middot; docker &middot; jenkins
+              </div>
+
+              <div class="ln">
+                <span class="u">sonu@portfolio</span>:~$ cat interests.txt
+              </div>
+
+              <div class="ln out">
+                devops &middot; cloud &middot; cybersecurity
+              </div>
+
+              <div class="ln">
+                <span class="u">sonu@portfolio</span>:~$ git status
+              </div>
+
+              <div class="pipe">
+                <span>learn &#10003;</span>
+                <span>practice &#10003;</span>
+                <span>build &#10003;</span>
+                <span>improve &#10003;</span>
+              </div>
+
+              <div class="ln">
+                <span class="u">sonu@portfolio</span>:~$
+                <span class="caret"></span>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </section>
-      <!-- landing page ends here -->
 
-      <section class="about-section-container" id="about" data-aos="fade-up">
-        <div class="about-section">
-          <div class="section-heading">
-            <h2 class="section-heading-article" tabindex="0" aria-label="About me heading">
-              AboutMe
-            </h2>
-            <p class="sectionHeadingP"></p>
+
+      <!-- ABOUT SECTION -->
+      <section id="about" class="sec">
+
+        <div class="in">
+
+          <div class="sec-head">
+            <span class="eyebrow">whoami</span>
+            <h2>About Me</h2>
           </div>
 
-          <div class="info-dp-section">
-            <div class="about-info">
-              <p tabindex="0">
-                Hi! My name is Sonu Kumar (professionally known as Daksh Prajapati). I am an enthusiastic and
-                career-focused BCA student at Maharshi Dayanand University with a profound interest in Cyber Security,
-                Ethical Hacking, and Cloud Engineering.
+          <div class="about-grid">
+
+            <div class="about-copy">
+
+              <p>
+                Hello! I'm <strong data-name>Sonu Kumar</strong>,
+                a Bachelor of Computer Applications (BCA) student at
+                <strong>Maharshi Dayanand University (MDU), Rohtak</strong>.
+                I have a strong interest in technology, cloud computing
+                and infrastructure automation.
               </p>
-              <br />
-              <p tabindex="0">
-                I love finding vulnerabilities, analyzing security frameworks, exploring cloud infrastructure options,
-                and automating deployment pipelines. I continuously learn and sharpen my expertise using active labs,
-                scripting, and system configurations.
+
+              <p>
+                Currently, I'm focusing primarily on learning
+                <strong>DevOps Engineering</strong>. I'm developing
+                my technical skills in Linux, Git, GitHub, Docker,
+                Jenkins, AWS Cloud and CI/CD pipelines.
+                I enjoy understanding how applications are developed,
+                containerized, automated and deployed in cloud environments.
               </p>
-              <br />
-              <p tabindex="0">
-                My core philosophy focuses on building resilient systems and designing infrastructure architectures that
-                stand up to modern digital threat matrixes.
+
+              <p>
+                Alongside DevOps, I'm also exploring
+                <strong>Cybersecurity and Ethical Hacking</strong>.
+                I'm interested in networking, Linux security,
+                system administration and understanding how to
+                identify and prevent security vulnerabilities.
               </p>
-              <!-- Resume button -->
-              <!-- Wrapped inside an anchor tag pointing directly to your file -->
-              <a href="src/pdf/sonu resume .pdf" target="_blank" style="text-decoration: none;">
-                <button class="resume-btn" id="resume-btn">
-                  <div class="sign">
-                    <svg viewBox="0 0 640 512">
-                      <path
-                        d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z" />
+
+              <p>
+                My goal is to become a skilled DevOps professional
+                with strong knowledge of cloud infrastructure and
+                security practices. I believe in continuous learning,
+                hands-on practice and improving my skills through
+                real-world projects.
+              </p>
+
+
+              <!-- PERSONAL DETAILS -->
+              <dl class="details">
+
+                <dt>Name</dt>
+                <dd data-name>Sonu Kumar</dd>
+
+                <dt>Education</dt>
+                <dd>Bachelor of Computer Applications (BCA)</dd>
+
+                <dt>University</dt>
+                <dd>Maharshi Dayanand University (MDU)</dd>
+
+                <dt>Primary Focus</dt>
+                <dd>DevOps Engineering</dd>
+
+                <dt>Also Exploring</dt>
+                <dd>Cybersecurity & Ethical Hacking</dd>
+
+                <dt>Cloud</dt>
+                <dd>AWS</dd>
+
+                <dt>Email</dt>
+                <dd data-email>itsmedaksh3048@gmail.com</dd>
+
+                <dt>Phone</dt>
+                <dd>+91 9534323048</dd>
+
+              </dl>
+
+
+              <div class="about-actions">
+
+                <a class="btn primary" id="resumeBtn" href="assets/resume/Daksh_Prajapati_Resume.pdf" download>
+
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 3v12M7 10l5 5 5-5M4 20h16" />
+                  </svg>
+
+                  Download Resume
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <!-- PROFILE PHOTO -->
+            <div class="photo-col">
+
+              <div class="photo-wrap" id="photoWrap">
+
+                <div class="ring"></div>
+
+                <span class="corner tl"></span>
+                <span class="corner tr"></span>
+                <span class="corner bl"></span>
+                <span class="corner br"></span>
+
+                <label class="photo" id="photoBox" for="photoInput" tabindex="0">
+
+                  <img id="photoImg" alt="Portrait of Sonu Kumar" hidden>
+
+                  <div class="ph" id="photoPh">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                      stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="8.5" r="4" />
+                      <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />
                     </svg>
+
+                    <span id="phText">Click to add your photo</span>
+
                   </div>
-                  <div class="text">Resume</div>
-                </button>
-              </a>
-            </div>
+                </label>
 
-            <div class="dp" data-aos="fade-up">
-              <img src="src/webp/sonu.png" alt="Daksh Prajapati" tabindex="0" aria-label="image of Daksh Prajapati" />
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- about section ends  -->
+                <input class="sr" id="photoInput" type="file" accept="image/*">
 
-      <section class="skills-section-container" id="skills">
-        <div class="skills-section">
-          <div class="section-heading" data-aos="fade-up">
-            <h2 class="section-heading-article" tabindex="0" aria-label="skills heading">
-              Skills
-            </h2>
-            <p class="sectionHeadingP"></p>
-          </div>
+                <span class="orbit" id="orbit"></span>
 
-          <div class="frontend-dev-section">
-            <h3 class="frontend-dev-heading" data-aos="fade-up" tabindex="0"
-              aria-label="These are the technical skills I have">
-              Tech Stack
-            </h3>
-            <ul class="tech-stack-wrapper">
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/linux.webp" alt="Linux skill" class="tech-stack-logo" />
-                <span class="tooltip">LINUX</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/aws.webp" alt="AWS skill" class="tech-stack-logo" />
-                <span class="tooltip">AWS</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/network.png" alt="Networking skill" class="tech-stack-logo" />
-                <span class="tooltip">NETWORKING</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/cybersecurity.webp" alt="Cybersecurity skill" class="tech-stack-logo" />
-                <span class="tooltip">CYBERSECURITY</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/ethical-hacking.png" alt="Ethical Hacking skill" class="tech-stack-logo" />
-                <span class="tooltip">ETHICAL HACKING</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/devops.png" alt="DevOps skill" class="tech-stack-logo" />
-                <span class="tooltip">DEVOPS</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/DOCKER.png" alt="Chef skill" class="tech-stack-logo" />
-                <span class="tooltip">DOCKER</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/python.webp" alt="Python skill" class="tech-stack-logo" />
-                <span class="tooltip">PYTHON</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/gitlogo.png" alt="Git skill" class="tech-stack-logo" />
-                <span class="tooltip">GIT</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/githublogo.png" alt="GitHub skill" class="tech-stack-logo needtobeinvert" />
-                <span class="tooltip">GITHUB</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/clogo.png" alt="C skill" class="tech-stack-logo" />
-                <span class="tooltip">C</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/html.webp" alt="HTML skill" class="tech-stack-logo" />
-                <span class="tooltip">HTML</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/css.png" alt="CSS skill" class="tech-stack-logo" />
-                <span class="tooltip">CSS</span>
-              </li>
-
-              <li class="tech-stack-box" data-aos="fade-up">
-                <img src="./src/png/js.webp" alt="JavaScript skill" class="tech-stack-logo" />
-                <span class="tooltip">JAVASCRIPT</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      <!-- skills section ends -->
-
-      <section class="projects-section-container" id="projects">
-        <div class="projects-section-div">
-          <div class="section-heading" data-aos="fade-up">
-            <h2 class="section-heading-article" tabindex="0" aria-label="My projects starts from here">
-              Projects
-            </h2>
-            <p class="sectionHeadingP"></p>
-          </div>
-          <div class="project-boxes-div">
-      
-            <!-- Project 1: Django Notes App -->
-            <div data-aos="fade-up" class="project-box-wrapper">
-              <div class="project-box project-box2">
-                <div class="info-div">
-                  <article class="ProjectHeading"><a href="Django Notes App.html"class="project-link" target="_blank" rel="noopener">Django-Notes-App </a></article>
-                  <p class="ProjectDescription">
-                    Django-Notes-App is a sleek, minimalist personal note-taking application designed with a dark-themed,
-                    mobile-first interface. It utilizes a decoupled architecture combining a Django REST Framework backend for
-                    persistent data management with a fast, responsive React frontend. Built for everyday quick capture, the
-                    app enables users to organize thoughts, track timestamps, and manage notes effortlessly.
-                  </p>
-                  
-                </div>
-                <div class="image-div">
-                  <img src="./src/png/notesapp1.png" alt="Django Notes App Preview" />
-                </div>
               </div>
             </div>
-      
-            <!-- Project 2: Linux Lab -->
-            <div data-aos="fade-up" class="project-box-wrapper">
-              <div class="project-box project-box2">
-                <div class="info-div">
-                  <article class="ProjectHeading">Linux Lab</article>
-                  <p class="ProjectDescription">
-                    An active implementation environments setup showcasing custom script utilities, network configuration, and
-                    system administration profiles. (Coming Soon)
-                  </p>
-                </div>
-                <div class="image-div">
-                  <img src="src/assets/linux-lab.png" alt="Linux Lab Project Preview" />
-                </div>
-              </div>
-            </div>
-      
-            <!-- Project 3: AWS Cloud Project -->
-            <div data-aos="fade-up" class="project-box-wrapper">
-              <div class="project-box project-box2">
-                <div class="info-div">
-                  <article class="ProjectHeading">AWS Cloud Project</article>
-                  <p class="ProjectDescription">
-                    Scalable architecture designs utilizing AWS services to demonstrate secure access governance
-                    configurations and infrastructure deployments. (Coming Soon)
-                  </p>
-                </div>
-                <div class="image-div">
-                  <img src="src/assets/aws-project.png" alt="AWS Cloud Project Preview" />
-                </div>
-              </div>
-            </div>
-      
-            <!-- Project 4: DevOps Automation -->
-            <div data-aos="fade-up" class="project-box-wrapper">
-              <div class="project-box project-box2">
-                <div class="info-div">
-                  <article class="ProjectHeading">DevOps Automation</article>
-                  <p class="ProjectDescription">
-                    Infrastructure as Code (IaC) configuration and auto-deployment pipelines utilizing tools like Chef, Git,
-                    and automation scripting. (Coming Soon)
-                  </p>
-                </div>
-                <div class="image-div">
-                  <img src="src/assets/devops-automation.png" alt="DevOps Automation Project Preview" />
-                </div>
-              </div>
-            </div>
-      
+
           </div>
+
+
+          <!-- SKILLS SECTION -->
+          <div class="skills" id="skills">
+
+            <span class="eyebrow">my tech stack</span>
+
+            <h3>Skills &amp; Technologies</h3>
+
+            <div class="skill-grid" id="skillGrid"></div>
+
+          </div>
+
         </div>
       </section>
 
-    <!-- main ends here -->
 
-    <footer id="footer">
-      <button class="fas" id="backtotopbutton" onclick="scrolltoTopfunction()">
-        <article aria-label="Back to top">&#8592;BACK TO TOP</article>
-      </button>
-      <div class="footer-background">
-        <div class="footer-blob"></div>
+      <!-- PROJECTS SECTION -->
+      <section id="projects" class="sec">
+
+        <div class="in">
+
+          <div class="sec-head">
+
+            <span class="eyebrow">my work</span>
+
+            <h2>Projects</h2>
+
+            <p>
+              I'm currently learning and working on practical
+              DevOps and cloud projects. More projects will be
+              added as I continue my learning journey.
+            </p>
+
+          </div>
+
+          <div class="proj-grid" id="projGrid"></div>
+
+        </div>
+      </section>
+
+
+      <!-- CONTACT SECTION -->
+      <section id="contact" class="sec">
+
+        <div class="in">
+
+          <div class="sec-head">
+
+            <span class="eyebrow">get in touch</span>
+
+            <h2>Contact Me</h2>
+
+            <p>
+              Interested in connecting, collaborating or discussing
+              DevOps, Cloud Computing and Cybersecurity?
+              Feel free to contact me.
+            </p>
+
+          </div>
+
+          <div class="contact-grid">
+
+            <a class="btn primary" href="mailto:itsmedaksh3048@gmail.com">
+              Email Me
+            </a>
+
+            <a class="btn" href="tel:+919534323048">
+              Call Me
+            </a>
+
+            <a class="btn" href="https://www.linkedin.com/in/sonu-kumar-01221b37b/" target="_blank" rel="noopener">
+              LinkedIn
+            </a>
+
+            <a class="btn" href="https://github.com/itsmedaksh3048-blip" target="_blank" rel="noopener">
+              GitHub
+            </a>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+
+    <!-- PROJECT DETAIL VIEW -->
+    <main id="detail" hidden></main>
+
+
+    <!-- FOOTER -->
+    <footer class="foot-wrap">
+
+      <div class="in foot">
+
+        <div class="social">
+
+          <a class="soc" id="liLink" href="https://www.linkedin.com/in/sonu-kumar-01221b37b/" target="_blank"
+            rel="noopener" aria-label="LinkedIn profile">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+
+            LinkedIn
+          </a>
+
+
+          <a class="soc" id="ghLink" href="https://github.com/itsmedaksh3048-blip" target="_blank" rel="noopener"
+            aria-label="GitHub profile">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+
+            GitHub
+          </a>
+
+
+          <a class="soc" id="mailLink" href="mailto:itsmedaksh3048@gmail.com" aria-label="Send an email">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+
+            Email
+          </a>
+
+        </div>
+
+
+        <p class="copy">
+          &copy; <span id="yr">2026</span>
+          <span data-name>Sonu Kumar</span>.
+          All rights reserved.
+        </p>
+
+        <p class="copy">
+          Learn &middot; Build &middot; Automate &middot; Secure &middot; Grow
+        </p>
+
+        <p class="copy">
+          Designed &amp; Developed by Sonu Kumar
+        </p>
+
       </div>
-      <div class="footer-foreground">
-        <div class="footercontainer">
-          <div class="two-words">
-            <article tabindex="0" aria-label="Learning, Living, and Leveling Up, my quote">
-              "Learning, Living, and Leveling Up."
-            </article>
-          </div>
-          <div class="social-media-container">
-            <div class="getintouch-heading">
-              <article>GetinTouch();</article>
-            </div>
-            <div class="logos">
-              <a href="https://www.linkedin.com/in/sonu-kumar-01221b37b/" target="_blank" aria-label="My LinkedIn">
-                <svg class="SocialHandle" viewBox="0 0 448 512">
-                  <path
-                    d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
-                </svg>
-              </a>
 
-              <a href="https://github.com/itsmedaksh3048-blip?tab=repositories" target="_blank" aria-label="My GitHub">
-                <svg viewBox="0 0 496 512" class="SocialHandle">
-                  <path
-                    d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
-                </svg>
-              </a>
-
-              <a href="mailto:itsmedaksh3048@gmail.com" target="_blank" aria-label="My Email">
-                <svg id="GmailLogo" viewBox="0 0 512 512">
-                  <path
-                    d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div class="footer-avatar-container">
-            <img src="src/png/footer-avatar-sonu.png" alt="animation-head" class="footer-avatar-img"
-              id="footer-wala-avatar" />
-            <div class="footer-avatar-face">
-              <div class="footer-avatar-eye footer-left-eye">
-                <div class="footer-pupil"></div>
-              </div>
-              <div class="footer-avatar-eye footer-right-eye">
-                <div class="footer-pupil"></div>
-              </div>
-            </div>
-          </div>
-          <div class="footer-bottom">
-            <article>
-              Design & Built by Daksh Prajapati
-            </article>
-          </div>
-        </div>
-      </div>
     </footer>
-    <!-- footer ends here -->
 
-    <script src="main.js"></script>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <script>
-      function openURL() {
-        var url = "src/pdf/Resume.pdf";
-        window.open(url, "_blank");
-      }
-    </script>
 
-    <script>
-      const cursorInner = document.getElementById("cursor-inner");
-      const cursorOuter = document.getElementById("cursor-outer");
-      const links = document.querySelectorAll("a,label,button");
+    <!-- JAVASCRIPT -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
 
-      document.addEventListener("mousemove", function (e) {
-        const posX = e.clientX;
-        const posY = e.clientY;
-
-        cursorInner.style.left = `${posX}px`;
-        cursorInner.style.top = `${posY}px`;
-
-        cursorOuter.animate(
-          {
-            left: `${posX}px`,
-            top: `${posY}px`,
-          },
-          { duration: 500, fill: "forwards" }
-        );
-
-        links.forEach((link) => {
-          link.addEventListener("mouseenter", () => {
-            cursorInner.classList.add("hover");
-            cursorOuter.classList.add("hover");
-          });
-          link.addEventListener("mouseleave", () => {
-            cursorInner.classList.remove("hover");
-            cursorOuter.classList.remove("hover");
-          });
-        });
-      });
-    </script>
   </body>
 
 </html>
